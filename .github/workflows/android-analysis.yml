@@ -1,0 +1,48 @@
+name: Android Device Analysis
+on:
+  workflow_dispatch:
+    inputs:
+      device_id:
+        description: 'Device ID to analyze'
+        required: true
+      action_type:
+        description: 'Type of action to perform'
+        required: true
+        default: 'analyze'
+        type: choice
+        options:
+        - analyze
+        - quarantine
+        - wipe
+
+jobs:
+  analyze-device:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r backend/requirements.txt
+          sudo apt-get update
+          sudo apt-get install android-tools-adb
+      
+      - name: Run Device Analysis
+        run: |
+          python backend/device_analyzer.py --device "${{ github.event.inputs.device_id }}" --action "${{ github.event.inputs.action_type }}"
+        env:
+          TENANT_ID: ${{ secrets.TENANT_ID }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-report
+          path: report_*.json
