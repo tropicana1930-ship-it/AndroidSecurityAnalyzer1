@@ -1,0 +1,8 @@
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-policies>
+        <!-- Permite el borrado de datos de fábrica -->
+        <wipe-data />
+        <!-- Permite forzar un bloqueo de pantalla (opcional) -->
+        <force-lock />
+    </uses-policies>
+</device-admin>

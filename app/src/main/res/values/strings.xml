@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Analizador de Seguridad Android</string>
+    <string name="device_admin_label">Administrador de Analizador de Seguridad</string>
+    <string name="device_admin_description">Permite realizar escaneos profundos y acciones de seguridad como cuarentena y borrado de fábrica (wipe), crucial para la gestión de amenazas corporativas.</string>
+    <string name="scan_button">Iniciar Escaneo de Seguridad</string>
+    <string name="status_initial">Presiona Iniciar Escaneo para analizar el dispositivo.</string>
+    <string name="wipe_test_button">Probar Borrado de Fábrica (Wipe)</string>
+</resources>
